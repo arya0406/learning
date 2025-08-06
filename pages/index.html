@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learnnomine - Achieving Your Dreams through Education</title>
+    <meta name="description" content="Learnnomine is an educational platform offering a wide range of courses to help you achieve your dreams through quality education.">
+    <meta name="keywords" content="education, online courses, e-learning, coding, data science, design, development">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/favicon.svg">
+    <base href="">
+    
+    <!-- External CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <!-- Include Header -->
+    <div id="header-container"></div>
+    
+    <!-- Include Hero -->
+    <div id="hero-container"></div>
+    
+    <!-- Include Stats -->
+    <div id="stats-container"></div>
+    
+    <!-- Popular Courses Section -->
+    <section class="courses-section" id="courses">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Our Popular <span class="highlight">Courses</span></h2>
+                <div class="course-tabs">
+                    <button class="tab-btn active" data-category="all">All Courses</button>
+                    <button class="tab-btn" data-category="web">Web Development</button>
+                    <button class="tab-btn" data-category="data">Data Science</button>
+                    <button class="tab-btn" data-category="design">UI/UX Design</button>
+                    <button class="tab-btn" data-category="mobile">Mobile Development</button>
+                </div>
+            </div>
+            <div class="courses-grid">
+                <!-- Course cards go here -->
+                <!-- Each card should have a data-category attribute matching the tab categories -->
+                <!-- Example card -->
+                <div class="course-card" data-category="data" data-aos="fade-up" data-aos-delay="100">
+                    <div class="course-image">
+                        <div class="course-placeholder blue-bg">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <h3>Data Science</h3>
+                        <p>Learn how to analyze and visualize data to extract valuable insights.</p>
+                        <div class="course-footer">
+                            <div class="course-rating">
+                                <span class="rating">4.5</span>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more course cards as needed -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-section" id="why-choose-us">
+        <div class="container">
+            <div class="why-choose-content">
+                <div class="why-choose-left" data-aos="fade-right">
+                    <div class="why-choose-image">
+                        <div class="image-placeholder">
+                            <img src="assets/students-illustration.svg" alt="Students Illustration" class="students-illustration">
+                        </div>
+                    </div>
+                </div>
+                <div class="why-choose-right" data-aos="fade-left">
+                    <h2>Why <span class="highlight">Choose Us?</span></h2>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Expert Instructors</h4>
+                                <p>Learn from industry professionals with years of experience</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Flexible Learning</h4>
+                                <p>Study at your own pace with 24/7 access to course materials</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Industry Recognition</h4>
+                                <p>Earn certificates recognized by top companies worldwide</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Include Awards Section -->
+    <div id="awards-container"></div>
+    
+    <!-- Include Contact Section -->
+    <div id="contact-container"></div>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content" data-aos="fade-up">
+                <h2>Join Our Learning To Improve Your Skills</h2>
+                <button class="cta-btn">Join Online Course</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Include Footer -->
+    <div id="footer-container"></div>
+    
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/courses.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Load components
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                });
+                
+            fetch('components/hero.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('hero-container').innerHTML = data;
+                });
+                
+            fetch('components/stats.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('stats-container').innerHTML = data;
+                });
+                
+            fetch('components/awards.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('awards-container').innerHTML = data;
+                });
+                
+            fetch('components/contact.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('contact-container').innerHTML = data;
+                });
+                
+            fetch('components/footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-container').innerHTML = data;
+                });
+        });
+    </script>
+</body>
+</html>
