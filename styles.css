@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 120px; /* Offset for fixed header */
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;

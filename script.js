@@ -34,11 +34,14 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
 window.addEventListener('scroll', () => {
     let current = '';
     const sections = document.querySelectorAll('section[id]');
+    const header = document.querySelector('.navbar');
+    const headerHeight = header ? header.offsetHeight : 120;
     
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
-        if (window.scrollY >= (sectionTop - 200)) {
+        // Adjust for header height
+        if (window.scrollY >= (sectionTop - headerHeight - 50)) {
             current = section.getAttribute('id');
         }
     });
@@ -77,9 +80,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+            // Get the header height
+            const header = document.querySelector('.navbar');
+            const headerHeight = header ? header.offsetHeight + 20 : 120; // 20px extra padding
+            
+            // Calculate position to scroll to
+            const targetPosition = target.offsetTop - headerHeight;
+            
+            // Smooth scroll to position
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
             });
         }
     });
@@ -144,15 +155,20 @@ if (prevBtn && nextBtn) {
 
 // Form Submission
 const contactForm = document.querySelector('.contact-form');
+console.log('Contact form found:', contactForm); // Debug log
+
 if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+        console.log('Form submitted!'); // Debug log
         
         // Get form data
         const formData = new FormData(contactForm);
         const name = formData.get('name');
         const mobile = formData.get('mobile');
         const email = formData.get('email');
+        
+        console.log('Form data:', { name, mobile, email }); // Debug log
         
         // Simple validation
         if (!name || !mobile || !email) {
@@ -174,9 +190,47 @@ if (contactForm) {
             return;
         }
         
-        // Success message
-        alert('Thank you for your submission! We will contact you soon.');
-        contactForm.reset();
+        // Disable submit button during submission
+        const submitBtn = contactForm.querySelector('.submit-btn');
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+        
+        try {
+            console.log('Sending request to server...'); // Debug log
+            
+            // Submit to server
+            const response = await fetch('/api/submit-inquiry', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: name,
+                    mobile: mobile,
+                    email: email
+                })
+            });
+            
+            console.log('Response received:', response); // Debug log
+            
+            const result = await response.json();
+            console.log('Result:', result); // Debug log
+            
+            if (result.success) {
+                alert(result.message);
+                contactForm.reset();
+            } else {
+                alert('Error: ' + result.message);
+            }
+        } catch (error) {
+            console.error('Submission error:', error);
+            alert('Network error. Please try again later.');
+        } finally {
+            // Re-enable submit button
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+        }
     });
 }
 
